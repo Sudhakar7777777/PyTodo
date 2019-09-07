@@ -11,6 +11,7 @@ services:
       - ENV=development
       - PORT=4000
       - DB=mongodb://mongodb:27017/todoDev
+      - SECRET='to-do-app-secret'
 
   mongodb:
     image: mongo:latest
