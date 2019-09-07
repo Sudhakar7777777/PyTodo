@@ -49,3 +49,21 @@ Once you have access to bash shell, connect to the Mongo instance.Mongodb
 
 ###### Reference:
 https://medium.com/@riken.mehta/full-stack-tutorial-flask-react-docker-420da3543c91
+https://jwt.io/introduction/
+https://blog.angular-university.io/angular-jwt/
+https://www.tutorialspoint.com/mongodb/index.htm
+
+###### General Reference:
+Python
+https://www.python.org/doc/
+https://en.wikipedia.org/wiki/Python_(programming_language)
+Flask
+http://flask.pocoo.org/docs/1.0/
+https://en.wikipedia.org/wiki/Flask_(web_framework)
+Docker
+https://docs.docker.com/
+https://en.wikipedia.org/wiki/Docker_(software)
+https://docs.docker.com/compose/
+MongoDB
+https://docs.mongodb.com/
+https://en.wikipedia.org/wiki/MongoDB
