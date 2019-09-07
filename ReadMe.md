@@ -30,7 +30,22 @@ You will be able to access the app on http://localhost:8080
 docker-compose up --build
 ```
 
+## How to login to mongo db image and validate db values
 
+```
+> docker ps
+
+> docker exec -it <container name> /bin/bash
+eg:
+> docker exec -it mongodb /bin/bash
+
+Once you have access to bash shell, connect to the Mongo instance.Mongodb
+> mongo
+> show dbs
+> use todoDev
+> show collections
+> db.users.find()
+```
 
 ###### Reference:
 https://medium.com/@riken.mehta/full-stack-tutorial-flask-react-docker-420da3543c91
