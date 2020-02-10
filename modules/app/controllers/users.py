@@ -9,7 +9,8 @@ from modules.logger import logger
 from modules.app.schemas import validate_user
 
 ROOT_PATH = os.environ.get('ROOT_PATH')
-LOG = logger.get_root_logger(__name__, filename=os.path.join(ROOT_PATH, 'output.log'))
+LOG = logger.get_root_logger(
+    __name__, filename=os.path.join(ROOT_PATH, 'output.log'))
 
 
 @jwt.unauthorized_loader
@@ -23,7 +24,8 @@ def register():
     data = validate_user(request.get_json())
     if data['ok']:
         data = data['data']
-        data['password'] = flask_bcrypt.generate_password_hash(data['password'])
+        data['password'] = flask_bcrypt.generate_password_hash(
+            data['password'])
         mongo.db.users.insert_one(data)
         return jsonify({'ok': True, 'message': 'User created successfully!'}), 200
     else:
@@ -32,11 +34,12 @@ def register():
 
 @app.route('/auth', methods=['POST'])
 def auth_user():
-    """ auth endpoint """
+    """ auth a.k.a login endpoint """
     data = validate_user(request.get_json())
     if data['ok']:
         data = data['data']
-        user_record = mongo.db.users.find_one({'email': data['email']}, {"_id": 0})
+        user_record = mongo.db.users.find_one(
+            {'email': data['email']}, {"_id": 0})
         if user_record and flask_bcrypt.check_password_hash(user_record['password'], data['password']):
             del user_record['password']
             access_token = create_access_token(identity=data)
@@ -59,7 +62,7 @@ def refresh():
     return jsonify({'ok': True, 'data': ret}), 200
 
 
-@app.route('/user', methods=['GET', 'DELETE', 'PATCH'])
+@app.route('/user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 @jwt_required
 def user():
     """ route read user """
@@ -84,7 +87,8 @@ def user():
 
     if request.method == 'PATCH':
         if data.get('query', {}) != {}:
-            mongo.db.users.update_one(data['query'], {'$set': data.get('payload', {})})
+            mongo.db.users.update_one(
+                data['query'], {'$set': data.get('payload', {})})
             return jsonify({'ok': True, 'message': 'record updated'}), 200
         else:
             return jsonify({'ok': False, 'message': 'Bad request parameters!'}), 400
